@@ -21,3 +21,6 @@ A list of free resources to learn Linux
 18. [Ryan's Tutorials](https://ryanstutorials.net)
 19. [TLDP Advanced Bash Scripting Guide](https://tldp.org/LDP/abs/html/)
 20. [Guru99 Linux Tutorial Summary](https://guru99.com/unix-linux-tutorial.html)
+
+---
+If you want to contribute, feel free to request a PR.
