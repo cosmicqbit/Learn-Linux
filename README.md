@@ -1,4 +1,4 @@
-# Learn Linux
+<h1 style="text-align:center">Learn Linux</h1>
 A list of free resources to learn Linux
 
 1. [OverTheWire](https://overthewire.org/wargames/bandit/)
