@@ -1,7 +1,7 @@
 <h1 style="text-align:center">Learn Linux</h1>
 A list of free resources to learn Linux
 
-1. [OverTheWire](https://overthewire.org/wargames/bandit/)
+1. [Linux Commands Handbook](https://www.freecodecamp.org/news/the-linux-commands-handbook/)
 2. [Linux Journey](https://linuxjourney.com)
 3. [Linux Handbook](https://linuxhandbook.com)
 4. [Tecmint](https://tecmint.com)
@@ -22,6 +22,6 @@ A list of free resources to learn Linux
 19. [TLDP Advanced Bash Scripting Guide](https://tldp.org/LDP/abs/html/)
 20. [Guru99 Linux Tutorial Summary](https://guru99.com/unix-linux-tutorial.html)
 21. [Geek-University's Linux Course ](https://geek-university.com/what-is-linux/)
-22. [Linux Commands Handbook](https://www.freecodecamp.org/news/the-linux-commands-handbook/)
+22. [OverTheWire](https://overthewire.org/wargames/bandit/)
 ---
 ⭐️ Start this repo if you like it & If you want to contribute feel free to request a PR.
