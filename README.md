@@ -1,9 +1,8 @@
 <h1 style="text-align:center">Learn Linux</h1>
 A list of free resources to learn Linux
 
-1. [Linux Commands Handbook](https://www.freecodecamp.org/news/the-linux-commands-handbook/)
-2. [Linux Command Line](https://lym.readthedocs.io/en/latest/index.html)
-<!-- 2. [Linux Journey](https://linuxjourney.com) (Temporarily down) -->
+1. [Linux Command Line](https://lym.readthedocs.io/en/latest/index.html) <!-- 2. [Linux Journey](https://linuxjourney.com) (Temporarily down) -->
+2. [Linux Commands Handbook](https://www.freecodecamp.org/news/the-linux-commands-handbook/)
 3. [Linux Handbook](https://linuxhandbook.com)
 4. [Tecmint](https://tecmint.com)
 5. [Linux Hint](https://linuxhint.com)
@@ -28,4 +27,4 @@ A list of free resources to learn Linux
 ## Shell / Bash Scripting
 - [Shellscript.sh](https://www.shellscript.sh/)
 ---
-⭐️ Start this repo if you like it & If you want to contribute feel free to request a PR.
+### ⭐️ Start this repo if you like it & feel free to request a PR.
