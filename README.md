@@ -3,7 +3,7 @@ A list of free resources to learn Linux
 
 1. [Linux Commands Handbook](https://www.freecodecamp.org/news/the-linux-commands-handbook/)
 2. [Linux Command Line](https://lym.readthedocs.io/en/latest/index.html)
-# 2. [Linux Journey](https://linuxjourney.com) (Temporarily down)
+<!-- 2. [Linux Journey](https://linuxjourney.com) (Temporarily down) -->
 3. [Linux Handbook](https://linuxhandbook.com)
 4. [Tecmint](https://tecmint.com)
 5. [Linux Hint](https://linuxhint.com)
