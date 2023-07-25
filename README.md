@@ -32,13 +32,14 @@ A list of free resources to learn Linux & CLI
 
 ## CLI / Vim
 
-[You Don't Need GUI](https://github.com/you-dont-need/You-Dont-Need-GUI) - CLI Commands Cheatsheet
-[Vim Cheatsheet](https://i.ibb.co/FbdMMHN/460e75dd8543.png) or [rTorr](https://vim.rtorr.com/) - Vim Code Editor Cheat Sheets
-[OpenVim](https://www.openvim.com/) - Interactive Vim Tutorial
-[Vim Adventures](https://vim-adventures.com/) - Vim Learning Game
-[Vim University](https://github.com/wincent/vim-university) - Vim Tips
-[The Linux Kernel](https://www.kernel.org/doc/html/latest/) - Linux Kernel Development Guides 
-[Workbench](https://github.com/sonnyp/Workbench) - Learn / Experiment with Gnome
+- [You Don't Need GUI](https://github.com/you-dont-need/You-Dont-Need-GUI) - CLI Commands Cheatsheet
+- [Vim Cheatsheet](https://i.ibb.co/FbdMMHN/460e75dd8543.png) or [rTorr](https://vim.rtorr.com/) - Vim Code Editor Cheat Sheets
+- [OpenVim](https://www.openvim.com/) - Interactive Vim Tutorial
+- [Vim Adventures](https://vim-adventures.com/) - Vim Learning Game
+- [Vim University](https://github.com/wincent/vim-university) - Vim Tips
+- [The Linux Kernel](https://www.kernel.org/doc/html/latest/) - Linux Kernel Development Guides 
+- [Workbench](https://github.com/sonnyp/Workbench) - Learn / Experiment with Gnome
+
 ---
 
 
