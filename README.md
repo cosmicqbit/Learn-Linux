@@ -1,5 +1,6 @@
-<h1 style="text-align:center">Learn Linux</h1>
-A list of free resources to learn Linux
+# Learn Linux
+
+A list of free resources to learn Linux & CLI
 
 1. [Linux Command Line](https://lym.readthedocs.io/en/latest/index.html) <!-- 2. [Linux Journey](https://linuxjourney.com) (Temporarily down) -->
 2. [Linux Commands Handbook](https://www.freecodecamp.org/news/the-linux-commands-handbook/)
@@ -25,6 +26,19 @@ A list of free resources to learn Linux
 22. [OverTheWire](https://overthewire.org/wargames/bandit/)
 
 ## Shell / Bash Scripting
+
 - [Shellscript.sh](https://www.shellscript.sh/)
+
+
+## CLI / Vim
+
+[You Don't Need GUI](https://github.com/you-dont-need/You-Dont-Need-GUI) - CLI Commands Cheatsheet
+[Vim Cheatsheet](https://i.ibb.co/FbdMMHN/460e75dd8543.png) or [rTorr](https://vim.rtorr.com/) - Vim Code Editor Cheat Sheets
+[OpenVim](https://www.openvim.com/) - Interactive Vim Tutorial
+[Vim Adventures](https://vim-adventures.com/) - Vim Learning Game
+[Vim University](https://github.com/wincent/vim-university) - Vim Tips
+[The Linux Kernel](https://www.kernel.org/doc/html/latest/) - Linux Kernel Development Guides 
+[Workbench](https://github.com/sonnyp/Workbench) - Learn / Experiment with Gnome
 ---
-### ⭐️ Start this repo if you like it & feel free to request a PR.
+
+
