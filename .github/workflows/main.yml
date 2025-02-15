@@ -28,9 +28,10 @@ jobs:
           message: |
             🚀 <a href="https://github.com/${{ github.repository }}/compare/${{ github.event.before }}...${{ github.event.after }}">1 new commit</a> to <b>Learn-Linux</b>:main:
 
-            📝 <b>Commit</b>: <a href="https://github.com/${{ github.repository }}/commit/${{ github.event.after }}">${{ steps.shorten_sha.outputs.sha_short }}</a>
+            #️⃣ <b>Commit</b>: <a href="https://github.com/${{ github.repository }}/commit/${{ github.event.after }}">${{ steps.shorten_sha.outputs.sha_short }}</a>
+            📜 <b>Message</b>: ${{ github.event.head_commit.message }}
             👤 <b>Author</b>: ${{ github.event.head_commit.author.name }}
             🌿 <b>Branch</b>: ${{ github.ref_name }}
             🔗 <b>Repo</b>: <a href="https://github.com/${{ github.repository }}">Browse Repository</a>
 
-            ✨ Workflow by cosmicqbit.dev
+            ✨ <code>- by wired 2.1</code>
