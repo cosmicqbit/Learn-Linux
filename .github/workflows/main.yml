@@ -1,0 +1,19 @@
+name: Test Telegram Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Notification
+        uses: appleboy/telegram-action@v1.5.10
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_API_KEY }}
+          message: |
+            A new commit has been pushed to the Learn-Linux repository!
+            Repository: https://github.com/cosmicqbit/
