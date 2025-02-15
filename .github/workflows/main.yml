@@ -26,6 +26,12 @@ jobs:
           format: html
           disable_web_page_preview: true
           message: |
-            🔨 <a href="https://github.com/${{ github.repository }}/compare/${{ github.event.before }}...${{ github.event.after }}">1 new commit</a> to Learn-Linux:main:
+            🔨 <a href="https://github.com/${{ github.repository }}/compare/${{ github.event.before }}...${{ github.event.after }}">1 new commit</a> to <b>Learn-Linux</b>:main:
 
-            <a href="https://github.com/${{ github.repository }}/commit/${{ github.event.after }}">${{ steps.shorten_sha.outputs.sha_short }}</a>: ${{ github.event.head_commit.message }} by ${{ github.event.head_commit.author.name }}
+            📝 <a href="https://github.com/${{ github.repository }}/commit/${{ github.event.after }}">${{ steps.shorten_sha.outputs.sha_short }}</a>: ${{ github.event.head_commit.message }}
+            👤 Commit author: ${{ github.event.head_commit.author.name }}
+            🌿 Branch: ${{ github.ref_name }}
+            🔗 <a href="https://github.com/${{ github.repository }}">Browse Repo</a>
+
+            ---
+            ✨ Workflow by cosmicqbit.dev
