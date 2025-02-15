@@ -2,13 +2,14 @@
 
 A list of free resources to learn Linux & CLI
 
-1. [Linux Command Line](https://lym.readthedocs.io/en/latest/index.html) <!-- 2. [Linux Journey](https://linuxjourney.com) (Temporarily down) -->
+0. [Linux Journey](https://linuxjourney.com)
+1. [Linux Command Line](https://lym.readthedocs.io/en/latest/index.html)  
 2. [Linux Commands Handbook](https://www.freecodecamp.org/news/the-linux-commands-handbook/)
 3. [Linux Handbook](https://linuxhandbook.com)
 4. [Tecmint](https://tecmint.com)
 5. [LinuxOPsys](https://linuxopsys.com/)
 6. [Linux Hint](https://linuxhint.com)
-7. [LinuxOPsys](https://linuxopsys.com)
+7. [Linuxtopia](https://www.linuxtopia.org/)
 8. [Linuxize](https://linuxize.com)
 9. [Eduonix Learn Linux From Scratch](https://eduonix.com/courses/system-programming/learn-linux-from-scratch)
 10. [Cyberciti Bash Shell Scripting Tutorial](https://bash.cyberciti.biz/guide/Main_Page)
@@ -25,6 +26,7 @@ A list of free resources to learn Linux & CLI
 21. [Guru99 Linux Tutorial Summary](https://guru99.com/unix-linux-tutorial.html)
 22. [Geek-University's Linux Course ](https://geek-university.com/what-is-linux/)
 23. [OverTheWire](https://overthewire.org/wargames/bandit/)
+
 
 ## Shell / Bash Scripting
 
