@@ -18,28 +18,24 @@ jobs:
         with:
           fetch-depth: 0  # Fetch all history for accurate comparison
 
-      # Step 2: Find new or updated .md files in the root directory
-      - name: Find New Markdown Files
-        id: find_md_files
-        run: |
-          NEW_MD_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '^issue-[0-9]+\.md$' || echo "")
-          if [ -z "$NEW_MD_FILES" ]; then
-            echo "No new .md files found."
-            exit 0
-          fi
-          echo "new_md_files=$NEW_MD_FILES" >> $GITHUB_ENV
+      # Step 2: Get changed files using tj-actions/changed-files
+      - name: Get Changed Files
+        id: changed-files
+        uses: tj-actions/changed-files@v45
 
-      # Step 3: Upload the new .md file(s) to Telegram
-      - name: Upload Markdown File to Telegram
-        if: env.new_md_files != ''
+      # Step 3: Upload new .md files to Telegram
+      - name: Upload Markdown Files to Telegram
+        if: ${{ steps.changed-files.outputs.added_files != '' }}
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_API_KEY }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          for FILE in ${{ env.new_md_files }}; do
-            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
-              -F chat_id="${TELEGRAM_CHAT_ID}" \
-              -F document=@"$FILE" \
-              -F caption="📢 *New Markdown File Added!*\n\nFilename: \`$FILE\`" \
-              -F parse_mode="Markdown"
+          for FILE in ${{ steps.changed-files.outputs.added_files }}; do
+            if [[ "$FILE" == *.md ]]; then
+              curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
+                -F chat_id="${TELEGRAM_CHAT_ID}" \
+                -F document=@"$FILE" \
+                -F caption="📢 *New Markdown File Added!*\n\nFilename: \`$FILE\`" \
+                -F parse_mode="Markdown"
+            fi
           done
