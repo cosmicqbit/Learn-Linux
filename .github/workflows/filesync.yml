@@ -23,7 +23,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v45
 
-           # Step 3: Translate Markdown Files using Google Translate API
+      # Step 3: Translate Markdown Files using Google Translate API
       - name: Translate Markdown Files
         if: ${{ steps.changed-files.outputs.added_files != '' }}
         env:
@@ -32,8 +32,7 @@ jobs:
           mkdir translated_files
           for FILE in ${{ steps.changed-files.outputs.added_files }}; do
             if [[ "$FILE" == *.md ]]; then
-              RAW_RESPONSE=$(curl -s -X POST "https://translation.googleapis.com/language/translate/v2" \
-                -H "Authorization: Bearer ${GOOGLE_API_KEY}" \
+              RAW_RESPONSE=$(curl -s -X POST "https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}" \
                 -H "Content-Type: application/json; charset=utf-8" \
                 -d '{
                       "q": "'"$(cat $FILE | sed 's/"/\\"/g' | jq -R -s .)"'",
@@ -50,7 +49,6 @@ jobs:
               echo "$TRANSLATED_CONTENT" > translated_files/$FILE
             fi
           done
-
 
       # Step 4: Upload Translated Files to Telegram
       - name: Upload Translated Files to Telegram
