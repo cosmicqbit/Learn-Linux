@@ -1,4 +1,4 @@
-name: Telegram File Upload
+name: Telegram File Upload with Translation
 
 on:
   push:
@@ -16,26 +16,46 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Fetch all history for accurate comparison
+          fetch-depth: 0
 
-      # Step 2: Get changed files using tj-actions/changed-files
+      # Step 2: Get changed Markdown files
       - name: Get Changed Files
         id: changed-files
         uses: tj-actions/changed-files@v45
 
-      # Step 3: Upload new .md files to Telegram
-      - name: Upload Markdown Files to Telegram
+      # Step 3: Translate Markdown Files using Google Translate API
+      - name: Translate Markdown Files
         if: ${{ steps.changed-files.outputs.added_files != '' }}
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          mkdir translated_files
+          for FILE in ${{ steps.changed-files.outputs.added_files }}; do
+            if [[ "$FILE" == *.md ]]; then
+              TRANSLATED_CONTENT=$(curl -s -X POST "https://translation.googleapis.com/language/translate/v2" \
+                -H "Authorization: Bearer ${GOOGLE_API_KEY}" \
+                -H "Content-Type: application/json" \
+                -d '{
+                      "q": "'"$(cat $FILE | jq -R -s .)"'",
+                      "source": "zh-CN",
+                      "target": "en",
+                      "format": "text"
+                    }' | jq -r '.data.translations[0].translatedText')
+              echo "$TRANSLATED_CONTENT" > translated_files/$FILE
+            fi
+          done
+
+      # Step 4: Upload Translated Files to Telegram
+      - name: Upload Translated Files to Telegram
+        if: success()
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_API_KEY }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          for FILE in ${{ steps.changed-files.outputs.added_files }}; do
-            if [[ "$FILE" == *.md ]]; then
-              curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
-                -F chat_id="${TELEGRAM_CHAT_ID}" \
-                -F document=@"$FILE" \
-                -F caption="📢 *New Markdown File Added!*\n\nFilename: \`$FILE\`" \
-                -F parse_mode="Markdown"
-            fi
+          for FILE in translated_files/*; do
+            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
+              -F chat_id="${TELEGRAM_CHAT_ID}" \
+              -F document=@"$FILE" \
+              -F caption="📢 *New Translated Markdown File Added!*\n\nFilename: \`$(basename $FILE)\`" \
+              -F parse_mode="Markdown"
           done
