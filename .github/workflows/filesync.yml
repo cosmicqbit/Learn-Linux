@@ -1,4 +1,4 @@
-name: Test Telegram Notification
+name: Telegram File Upload
 
 on:
   push:
