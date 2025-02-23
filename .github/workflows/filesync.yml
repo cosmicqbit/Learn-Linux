@@ -1,60 +1,41 @@
-name: Telegram File Upload with Translation
+name: Telegram File Upload
 
 on:
   push:
     branches:
       - main
     paths:
-      - '*.md'
+      - '*.md' # Trigger only when .md files are added/modified at the root level
 
 jobs:
   notify:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
+      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Fetch all history for accurate comparison
 
-      # Step 2: Get changed Markdown files
+      # Step 2: Get changed files using tj-actions/changed-files
       - name: Get Changed Files
         id: changed-files
         uses: tj-actions/changed-files@v45
 
-      # Step 3: Translate Markdown Files using Google Translate API
-      - name: Translate Markdown Files
+      # Step 3: Upload new .md files to Telegram
+      - name: Upload Markdown Files to Telegram
         if: ${{ steps.changed-files.outputs.added_files != '' }}
-        env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: |
-          mkdir translated_files
-          for FILE in ${{ steps.changed-files.outputs.added_files }}; do
-            if [[ "$FILE" == *.md ]]; then
-              TRANSLATED_CONTENT=$(curl -s -X POST "https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}" \
-                -H "Content-Type: application/json; charset=utf-8" \
-                -d '{
-                      "q": "'"$(cat $FILE | sed 's/\n/<br>/g' | sed 's/"/\\"/g' | jq -R -s .)"'",
-                      "source": "zh-CN",
-                      "target": "en",
-                      "format": "html"
-                    }' | jq -r '.data.translations[0].translatedText' | sed 's/<br>/\n/g')
-              echo "$TRANSLATED_CONTENT" > translated_files/$FILE
-            fi
-          done
-
-      # Step 4: Upload Translated Files to Telegram
-      - name: Upload Translated Files to Telegram
-        if: success()
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_API_KEY }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          for FILE in translated_files/*; do
-            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
-              -F chat_id="${TELEGRAM_CHAT_ID}" \
-              -F document=@"$FILE" \
-              -F caption="📢 *New Translated Markdown File Added!*\n\nFilename: \`$(basename $FILE)\`" \
-              -F parse_mode="Markdown"
+          for FILE in ${{ steps.changed-files.outputs.added_files }}; do
+            if [[ "$FILE" == *.md ]]; then
+              curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
+                -F chat_id="${TELEGRAM_CHAT_ID}" \
+                -F document=@"$FILE" \
+                -F caption="📢 *New Markdown File Added!*\n\nFilename: \`$FILE\`" \
+                -F parse_mode="Markdown"
+            fi
           done
