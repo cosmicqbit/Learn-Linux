@@ -23,7 +23,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v45
 
-      # Step 3: Translate Markdown Files using Google Translate API
+           # Step 3: Translate Markdown Files using Google Translate API
       - name: Translate Markdown Files
         if: ${{ steps.changed-files.outputs.added_files != '' }}
         env:
@@ -32,18 +32,25 @@ jobs:
           mkdir translated_files
           for FILE in ${{ steps.changed-files.outputs.added_files }}; do
             if [[ "$FILE" == *.md ]]; then
-              TRANSLATED_CONTENT=$(curl -s -X POST "https://translation.googleapis.com/language/translate/v2" \
+              RAW_RESPONSE=$(curl -s -X POST "https://translation.googleapis.com/language/translate/v2" \
                 -H "Authorization: Bearer ${GOOGLE_API_KEY}" \
-                -H "Content-Type: application/json" \
+                -H "Content-Type: application/json; charset=utf-8" \
                 -d '{
-                      "q": "'"$(cat $FILE | jq -R -s .)"'",
+                      "q": "'"$(cat $FILE | sed 's/"/\\"/g' | jq -R -s .)"'",
                       "source": "zh-CN",
                       "target": "en",
                       "format": "text"
-                    }' | jq -r '.data.translations[0].translatedText')
+                    }')
+              echo "$RAW_RESPONSE" # Log raw response for debugging
+              TRANSLATED_CONTENT=$(echo "$RAW_RESPONSE" | jq -r '.data.translations[0].translatedText')
+              if [[ "$TRANSLATED_CONTENT" == null ]]; then
+                echo "Translation failed for $FILE"
+                exit 1
+              fi
               echo "$TRANSLATED_CONTENT" > translated_files/$FILE
             fi
           done
+
 
       # Step 4: Upload Translated Files to Telegram
       - name: Upload Translated Files to Telegram
