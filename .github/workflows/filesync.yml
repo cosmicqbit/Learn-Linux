@@ -32,10 +32,11 @@ jobs:
           mkdir translated_files
           for FILE in ${{ steps.changed-files.outputs.added_files }}; do
             if [[ "$FILE" == *.md ]]; then
+              ESCAPED_TEXT=$(cat $FILE | sed 's/"/\\"/g' | jq -R -s .)
               RAW_RESPONSE=$(curl -s -X POST "https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}" \
                 -H "Content-Type: application/json; charset=utf-8" \
                 -d '{
-                      "q": "'"$(cat $FILE | sed 's/"/\\"/g' | jq -R -s .)"'",
+                      "q": '"$ESCAPED_TEXT"',
                       "source": "zh-CN",
                       "target": "en",
                       "format": "text"
