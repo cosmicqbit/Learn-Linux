@@ -1,37 +1,45 @@
-name: Test Telegram Notification
+name: Telegram File Upload
 
 on:
   push:
     branches:
       - main
+    paths:
+      - '*.md' # Trigger only when .md files are added/modified at the root level
 
 jobs:
   notify:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Fetch all history for accurate comparison
 
-      - name: Shorten SHA
-        id: shorten_sha
-        run: echo "sha_short=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+      # Step 2: Find new or updated .md files in the root directory
+      - name: Find New Markdown Files
+        id: find_md_files
+        run: |
+          NEW_MD_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '^issue-[0-9]+\.md$' || echo "")
+          if [ -z "$NEW_MD_FILES" ]; then
+            echo "No new .md files found."
+            exit 0
+          fi
+          echo "new_md_files=$NEW_MD_FILES" >> $GITHUB_ENV
 
-      - name: Send Telegram Notification
-        uses: appleboy/telegram-action@v0.1.0
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_BOT_API_KEY }}
-          format: html
-          disable_web_page_preview: true
-          message: |
-            🚀 <a href="https://github.com/${{ github.repository }}/compare/${{ github.event.before }}...${{ github.event.after }}">1 new commit</a> to <b>Learn-Linux</b>:main:
-
-            #️⃣ <b>Commit</b>: <a href="https://github.com/${{ github.repository }}/commit/${{ github.event.after }}">${{ steps.shorten_sha.outputs.sha_short }}</a>
-            📜 <b>Message</b>: ${{ github.event.head_commit.message }}
-            👤 <b>Author</b>: ${{ github.event.head_commit.author.name }}
-            🌿 <b>Branch</b>: ${{ github.ref_name }}
-            🔗 <b>Repo</b>: <a href="https://github.com/${{ github.repository }}">Browse Repository</a>
-
-            ✨ <code>- by wired 2.1</code>
+      # Step 3: Upload the new .md file(s) to Telegram
+      - name: Upload Markdown File to Telegram
+        if: env.new_md_files != ''
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_API_KEY }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          for FILE in ${{ env.new_md_files }}; do
+            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
+              -F chat_id="${TELEGRAM_CHAT_ID}" \
+              -F document=@"$FILE" \
+              -F caption="📢 *New Markdown File Added!*\n\nFilename: \`$FILE\`" \
+              -F parse_mode="Markdown"
+          done
