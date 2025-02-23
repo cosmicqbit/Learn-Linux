@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - '*.md' # Trigger only when .md files are added/modified at the root level
+      - '*.md'
 
 jobs:
   notify:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -32,21 +32,14 @@ jobs:
           mkdir translated_files
           for FILE in ${{ steps.changed-files.outputs.added_files }}; do
             if [[ "$FILE" == *.md ]]; then
-              ESCAPED_TEXT=$(cat $FILE | sed 's/"/\\"/g' | jq -R -s .)
-              RAW_RESPONSE=$(curl -s -X POST "https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}" \
+              TRANSLATED_CONTENT=$(curl -s -X POST "https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}" \
                 -H "Content-Type: application/json; charset=utf-8" \
                 -d '{
-                      "q": '"$ESCAPED_TEXT"',
+                      "q": "'"$(cat $FILE | sed 's/\n/<br>/g' | sed 's/"/\\"/g' | jq -R -s .)"'",
                       "source": "zh-CN",
                       "target": "en",
-                      "format": "text"
-                    }')
-              echo "$RAW_RESPONSE" # Log raw response for debugging
-              TRANSLATED_CONTENT=$(echo "$RAW_RESPONSE" | jq -r '.data.translations[0].translatedText')
-              if [[ "$TRANSLATED_CONTENT" == null ]]; then
-                echo "Translation failed for $FILE"
-                exit 1
-              fi
+                      "format": "html"
+                    }' | jq -r '.data.translations[0].translatedText' | sed 's/<br>/\n/g')
               echo "$TRANSLATED_CONTENT" > translated_files/$FILE
             fi
           done
