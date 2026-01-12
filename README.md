@@ -1,6 +1,9 @@
-# Learn Linux
+<p align="center">
+  <img src="assets/banner.png" alt="Learn Linux banner" />
+</p>
 
-A list of free resources to learn Linux & CLI
+**Learn Linux**  
+A curated collection of free, high quality resources to learn Linux, the command line, and system fundamentals.
 
 0. [Linux Journey](https://linuxjourney.com)
 1. [Linux Command Line](https://lym.readthedocs.io/en/latest/index.html)  
@@ -48,6 +51,29 @@ A list of free resources to learn Linux & CLI
 
 - [How to Secure A Linux Server](https://github.com/imthenachoman/How-To-Secure-A-Linux-Server?tab=readme-ov-file#why-secure-your-server)
 
----
+## About
 
+This repository exists to help beginners and intermediate users build strong Linux and CLI fundamentals using free resources.
+
+## Contributing
+
+Contributions are welcome and appreciated.
+
+You can help by
+- Adding new high quality Linux learning resources
+- Fixing broken links
+- Improving descriptions or categorization
+- Improving documentation structure
+
+Guidelines
+1. Ensure resources are free and legally accessible
+2. Prefer official documentation or well established community resources
+3. Avoid low quality or spammy links
+4. Keep descriptions concise and neutral
+
+To contribute
+1. Fork the repository
+2. Create a new branch
+3. Make your changes
+4. Open a pull request with a clear description
 
