@@ -44,6 +44,10 @@ A list of free resources to learn Linux & CLI
 - [The Linux Kernel](https://www.kernel.org/doc/html/latest/) - Linux Kernel Development Guides 
 - [Workbench](https://github.com/sonnyp/Workbench) - Learn / Experiment with Gnome
 
+## Security 
+
+- [How to Secure A Linux Server](https://github.com/imthenachoman/How-To-Secure-A-Linux-Server?tab=readme-ov-file#why-secure-your-server)
+
 ---
 
 
