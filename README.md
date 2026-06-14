@@ -30,7 +30,7 @@ A curated collection of free, high quality resources to learn Linux, the command
 22. [Geek-University's Linux Course ](https://geek-university.com/what-is-linux/)
 23. [OverTheWire](https://overthewire.org/wargames/bandit/)
 24. [CommandMasters](https://commandmasters.com)
-25. [Howtolinux](https://howtolinux.vercel.app/)
+25. [LinuxCommandLibrary]([https://howtolinux.vercel.app/](https://linuxcommandlibrary.com/basic/ssh))
 
 
 ## Shell / Bash Scripting
