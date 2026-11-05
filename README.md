@@ -47,6 +47,7 @@ A curated collection of free, high quality resources to learn Linux, the command
 - [Vim University](https://github.com/wincent/vim-university) - Vim Tips
 - [The Linux Kernel](https://www.kernel.org/doc/html/latest/) - Linux Kernel Development Guides 
 - [Workbench](https://github.com/sonnyp/Workbench) - Learn / Experiment with Gnome
+- [Learn VIM the Smart Way](https://github.com/iggredible/Learn-Vim) - Learn Vim locally
 
 ## Security 
 
